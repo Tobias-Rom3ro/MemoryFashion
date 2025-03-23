@@ -303,9 +303,9 @@ botonesNivel.forEach(btn => {
     });
 });
 
-//evento 
+//evento para reducir al 15% el volumen de la musica de fondo
 window.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("musicaFondo").volume = 0.2; // Baja el volumen al 20%
+    document.getElementById("musicaFondo").volume = 0.15; 
 });
 
 
