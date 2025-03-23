@@ -6,6 +6,12 @@ const btnReiniciar = document.getElementById('reiniciar');
 const estrellas = document.querySelectorAll('.estrellas .fa-star');
 const botonesNivel = document.querySelectorAll('.btn-nivel');
 
+//importando los sonidos 
+const sonidoAcierto = document.getElementById("sonidoAcierto");
+const sonidoError = document.getElementById("sonidoError");
+const sonidoVictoria = document.getElementById("sonidoVictoria");
+
+
 // Variables del juego
 let cartas = [];
 let cartasVolteadas = [];
@@ -203,6 +209,8 @@ function verificarCoincidencia() {
     if (carta1.icono === carta2.icono) {
         // Las cartas coinciden
         setTimeout(() => {
+            sonidoAcierto.currentTime = 0; // reiniciar el audio por si estaba sonando
+            sonidoAcierto.play(); //reproducir el audio para cuando coincide la pareja
             cartasVolteadas.forEach(c => {
                 c.elemento.classList.add('encontrada');
                 cartas[c.index].encontrada = true;
@@ -218,6 +226,8 @@ function verificarCoincidencia() {
     } else {
         // Las cartas no coinciden
         setTimeout(() => {
+            sonidoError.currentTime = 0; // reiniciar el audio por si estaba sonando
+            sonidoError.play(); //reproducir el audio para cuando NO coincide la pareja
             cartasVolteadas.forEach(c => {
                 c.elemento.classList.remove('volteada');
             });
@@ -245,6 +255,8 @@ function finalizarJuego() {
 
     // Mostrar mensaje de victoria con SweetAlert
     setTimeout(() => {
+        sonidoVictoria.currentTime = 0; //reiniciar el audio por si estab sonando 
+        sonidoVictoria.play(); //reproducir sonido de victoria 
         Swal.fire({
             title: '¡Felicidades!',
             html: `
@@ -264,6 +276,22 @@ function finalizarJuego() {
     }, 500);
 }
 
+
+//función para reproducir el sonido de los botones 
+const botones = document.querySelectorAll("button");
+
+    function reproducirSonido() {
+        const sonido = document.getElementById("botonSonido");
+        sonido.currentTime = 0; // Reinicia el audio para que suene cada vez que se presiona
+        sonido.play();
+    }
+
+    //agregar el sonido a cada boton 
+    botones.forEach(boton => {
+        boton.addEventListener("click", reproducirSonido);
+    });
+
+
 // Event Listeners
 btnReiniciar.addEventListener('click', iniciarJuego);
 
@@ -274,6 +302,12 @@ botonesNivel.forEach(btn => {
         iniciarJuego();
     });
 });
+
+//evento para reducir al 15% el volumen de la musica de fondo
+window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("musicaFondo").volume = 0.15; 
+});
+
 
 // Iniciar el juego cuando carga la página
 window.addEventListener('load', iniciarJuego);
