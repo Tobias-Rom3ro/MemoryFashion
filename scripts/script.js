@@ -119,7 +119,7 @@ function crearTablero() {
         const caraTrasera = document.createElement('div');
         caraTrasera.className = 'carta-trasera';
         const iconoLogo = document.createElement('img');
-        iconoLogo.src = 'public/icon.png';
+        iconoLogo.src = 'resources/images/icon.png';
         iconoLogo.alt = 'Memory Fashion';
         iconoLogo.className = 'icono-trasero';
         caraTrasera.appendChild(iconoLogo);
