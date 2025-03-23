@@ -248,7 +248,7 @@ function finalizarJuego() {
         Swal.fire({
             title: '¡Felicidades!',
             html: `
-                <p>Has completado el Memory Fashion</p>
+                <p>Has completado el reto</p>
                 <p><i class="fas fa-shoe-prints"></i> Movimientos: ${movimientos}</p>
                 <p><i class="fas fa-clock"></i> Tiempo: ${contadorTiempo.textContent}</p>
                 <p>Puntuación: ${Array(estrellasSinApagar).fill('<i class="fas fa-star" style="color: gold;"></i>').join('')}</p>
