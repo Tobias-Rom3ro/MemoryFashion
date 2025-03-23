@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Memory Fashion</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
-    <h1> Memory Garden </h1>
+<div class="contenedor">
+    <header>
+        <h1>Memory Fashion</h1>
+        <p class="subtitulo">¡Encuentra las parejas!</p>
+    </header>
 
+    <div class="panel-control">
+        <div class="info">
+            <div class="movimientos">
+                <i class="fas fa-shoe-prints"></i>
+                <span id="contador-movimientos">0</span> Movimientos
+            </div>
+            <div class="tiempo">
+                <i class="fas fa-clock"></i>
+                <span id="contador-tiempo">00:00</span>
+            </div>
+        </div>
+        <div class="estrellas">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <button id="reiniciar" class="btn-reiniciar">
+            <i class="fas fa-redo-alt"></i> Reiniciar
+        </button>
+    </div>
 
+    <div class="nivel-selector">
+        <button class="btn-nivel" data-dificultad="facil">Fácil</button>
+        <button class="btn-nivel seleccionado" data-dificultad="medio">Medio</button>
+        <button class="btn-nivel" data-dificultad="dificil">Difícil</button>
+    </div>
 
+    <div class="tablero" id="tablero">
+        <!-- aquí no va nada xd, las cartas se generarán con JavaScript kkk -->
+    </div>
+</div>
 
-    
+<footer>
+    <p>Memory Fashion (KDT) &copy; 2025 - Un juego de memoria con estilo.</p>
+</footer>
+
+<script src="scripts/script.js"></script>
 </body>
 </html>
