@@ -197,7 +197,7 @@ h1 {
 
 .carta.encontrada {
     transform: rotateY(180deg);
-    border: none;
+    border: 1px solid #d81b60;
     animation: neonPulse 1.5s infinite;
 }
 
