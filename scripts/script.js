@@ -180,9 +180,9 @@ function actualizarMovimientos() {
 function actualizarEstrellas() {
     // Thresholds para perder estrellas (ajustar según dificultad)
     const limitesPorDificultad = {
-        facil: [6, 10],
-        medio: [12, 18],
-        dificil: [18, 25]
+        facil: [4, 6],
+        medio: [6, 10],
+        dificil: [10, 16]
     };
 
     const limites = limitesPorDificultad[dificultad];
