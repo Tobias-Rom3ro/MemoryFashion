@@ -2,7 +2,7 @@
 
 ¡Un juego de memoria con estilo! Encuentra todas las parejas de íconos relacionados con la moda mientras pones a prueba tu memoria.
 
-![Memory Fashion Game](screenshots/memory-game.png)
+![Memory Fashion Game](resources/images/screenshot.png)
 
 ## 🎮 Descripción
 
