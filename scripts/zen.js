@@ -222,33 +222,36 @@ function finalizarJuego(victoria) {
     clearInterval(temporizador);
     
     if (victoria) {
-        const tiempoFinal = Math.floor((Date.now() - tiempoInicio) / 1000);
-        const estrellasGanadas = 3 - document.querySelectorAll('.estrellas .apagada').length;
-        
-        // Calcular puntuación final
-        const puntosTiempo = Math.max(0, 300 - tiempoFinal);
-        const puntosEstrellas = estrellasGanadas * 200;
-        const puntuacionFinal = puntosActuales + puntosTiempo + puntosEstrellas;
-        
         setTimeout(() => {
             sonidoVictoria.play();
             Swal.fire({
                 title: '¡Felicitaciones!',
-                html: `
-                    <p>¡Has completado el nivel ${nivelActual}!</p>
-                    <p>Tiempo: ${Math.floor(tiempoFinal / 60)}:${(tiempoFinal % 60).toString().padStart(2, '0')}</p>
-                    <p>Movimientos: ${movimientos}</p>
-                    <p>Estrellas: ${estrellasGanadas}</p>
-                    <p>Puntuación Final: ${puntuacionFinal}</p>
-                `,
+                html: `<p style="font-size: 1.2em;">¡Has completado el nivel ${nivelActual}!</p>`,
                 icon: 'success',
-                confirmButtonText: 'Jugar de nuevo'
+                confirmButtonText: 'Jugar de nuevo',
+                confirmButtonColor: '#d81b60',
+                iconColor: '#d81b60'
             }).then(() => {
                 inicializarJuego(nivelActual);
             });
         }, 500);
     }
 }
+
+// Iniciar música de fondo
+function iniciarMusicaFondo() {
+    musicaFondo.volume = 0.3;
+    musicaFondo.loop = true;
+    musicaFondo.play().catch(error => {
+        console.log("Reproducción automática bloqueada por el navegador");
+    });
+}
+
+// Intentar reproducir la música de múltiples maneras
+window.addEventListener('load', iniciarMusicaFondo);
+document.addEventListener('click', iniciarMusicaFondo);
+document.addEventListener('keydown', iniciarMusicaFondo);
+document.addEventListener('mousemove', iniciarMusicaFondo);
 
 // Event Listeners
 btnReiniciar.addEventListener('click', () => {
