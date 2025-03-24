@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Fashion</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="icon" type="image/png" href="../resources/images/icon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<div class="transition-overlay"></div>
+<div class="contenedor">
+    <a href="../index.html" class="btn-menu btn-nivel" data-transition>
+        <i class="fas fa-home"></i> Menu
+    </a>
+    <header>
+        <h1>Memory Fashion</h1>
+        <p class="subtitulo">¡Encuentra las parejas!</p>
+    </header>
+
+    <div class="panel-control">
+        <div class="info">
+            <div class="movimientos">
+                <i class="fas fa-shoe-prints"></i>
+                <span id="contador-movimientos">0</span> Movimientos
+            </div>
+
+            <div class="tiempo">
+                <i class="fas fa-clock"></i>
+                <span id="contador-tiempo">00:00</span>
+            </div>
+
+            <div class="puntos">
+                <i class="fas fa-star"></i>
+                <span id="puntos">Puntos: 1000</span>
+            </div>
+        </div>
+        <div class="estrellas">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <button id="reiniciar" class="btn-reiniciar">
+            <i class="fas fa-redo-alt"></i> Reiniciar
+        </button>
+    </div>
+
+
+    <div class="nivel-selector">
+        <button class="btn-nivel" data-dificultad="facil">Fácil</button>
+        <button class="btn-nivel seleccionado" data-dificultad="medio">Medio</button>
+        <button class="btn-nivel" data-dificultad="dificil">Difícil</button>
+    </div>
+
+
+    <div class="tablero" id="tablero">
+        <!-- aquí no va nada xd, las cartas se generarán con JavaScript kkk -->
+    </div>
+</div>
+
+    <footer>
+        <p>Memory Fashion (KDT) &copy; 2025 - Un juego de memoria con estilo.</p>
+    </footer>
+
+    <!-- musica de fondo-->
+    <audio id="musicaFondo" autoplay loop hidden>
+        <source src="../resources/audio/background-music.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- sonido al presionar un botón -->
+    <audio id="botonSonido">
+        <source src="../resources/audio/press-button.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- sonidos para cuando se acierta una pareja o no, y para cuando se gana el juego-->
+    <audio id="sonidoAcierto" src="../resources/audio/bonus.mp3"></audio>
+    <audio id="sonidoError" src="../resources/audio/error.mp3"></audio>
+    <audio id="sonidoVictoria" src="../resources/audio/victory.mp3"></audio>
+
+<script src="../scripts/script.js"></script>
+<script src="../scripts/pageTransition.js"></script>
+</body>
+</html>
