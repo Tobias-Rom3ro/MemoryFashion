@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Londrina Solid', sans-serif;
+    background: linear-gradient(135deg, #fce8e8 0%, #ffffff 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    background-image: url('../resources/images/FOndo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    background-color: #fad3d3;
+    color: #9e4675;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.home-button:hover {
+    background-color: #9e4675;
+    color: white;
+    transform: scale(1.1);
+}
+
+.credits-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    perspective: 400px;
+}
+
+.credits-content {
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    animation: scrollCredits 60s linear infinite;
+    transform-origin: 50% 100%;
+    transform: translateY(100vh) rotateX(25deg);
+}
+
+@keyframes scrollCredits {
+    0% {
+        transform: translateY(100vh) rotateX(25deg);
+    }
+    100% {
+        transform: translateY(-250vh) rotateX(25deg);
+    }
+}
+
+h1 {
+    color: #9e4675;
+    font-size: 4rem;
+    margin-bottom: 4rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.credit-section {
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.credit-section h2 {
+    color: #9e4675;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.credit-section p {
+    color: #666;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Aplicar delays de animación a las secciones */
+.credit-section:nth-child(1) { animation-delay: 0.5s; }
+.credit-section:nth-child(2) { animation-delay: 1s; }
+.credit-section:nth-child(3) { animation-delay: 1.5s; }
+.credit-section:nth-child(4) { animation-delay: 2s; }
+.credit-section:nth-child(5) { animation-delay: 2.5s; }
+.credit-section:nth-child(6) { animation-delay: 3s; }
+.credit-section:nth-child(7) { animation-delay: 3.5s; }
+.credit-section:nth-child(8) { animation-delay: 4s; }
+.credit-section:nth-child(9) { animation-delay: 4.5s; }
+.credit-section:nth-child(10) { animation-delay: 5s; }
+.credit-section:nth-child(11) { animation-delay: 5.5s; }

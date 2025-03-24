@@ -1,0 +1,213 @@
+/* Variables */
+:root {
+    --primary-color: #d81b60;
+    --secondary-color: #ff5c8d;
+    --background-light: rgba(248, 249, 250, 0.9);
+    --background-dark: rgba(26, 26, 26, 0.9);
+    --text-light: #333;
+    --text-dark: #fff;
+    --card-light: rgba(255, 255, 255, 0.95);
+    --card-dark: rgba(45, 45, 45, 0.95);
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
+}
+
+/* Tema claro/oscuro */
+body.light {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+
+body.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Londrina Solid', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+    background-image: url('../resources/images/FOndo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Encabezado */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 4rem;
+    margin: 0;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitulo {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    color: var(--secondary-color);
+}
+
+/* Botones principales */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.btn-principal {
+    font-family: 'Londrina Solid', sans-serif;
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.btn-principal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-principal:active {
+    transform: translateY(0);
+}
+
+.btn-principal i {
+    font-size: 1.2em;
+}
+
+/* Menú de modos */
+.menu-modos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    margin: 0 auto;
+}
+
+.menu-modos.visible {
+    max-height: 1000px;
+}
+
+.menu-modos.oculto {
+    max-height: 0;
+}
+
+.mode-card {
+    background-color: var(--card-light);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    box-shadow: 0 4px 6px var(--shadow-light);
+}
+
+.mode-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px var(--shadow-light);
+}
+
+.mode-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.mode-card h2 {
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+    font-size: 1.8rem;
+}
+
+.mode-card p {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    color: var(--text-light);
+}
+
+/* Transiciones de página */
+.transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: translateX(-100%);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contenedor {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .menu-modos {
+        gap: 1rem;
+    }
+
+    .mode-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .mode-card {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,80 @@
+/* Estilos específicos para el modo zen */
+.contenedor {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eaec 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.puntos {
+    font-family: 'Courier New', Courier, monospace;
+  
+}
+
+/* Ajustes para el tablero en modo zen */
+.tablero {
+    margin-top: 30px;
+}
+
+/* Estilo especial para las cartas en modo zen */
+.carta {
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carta:hover {
+    transform: scale(1.02);
+}
+
+.carta.encontrada {
+    box-shadow: 0 0 15px #4CAF50,
+                0 0 25px #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+/* Personalización de los botones de nivel para el modo zen */
+.btn-nivel {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    transition: all 0.4s ease;
+}
+
+.btn-nivel:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn-nivel.seleccionado {
+    background-color: #357a38;
+    transform: scale(1.05);
+}
+
+/* Estilos para el encabezado */
+h1 {
+    color: #4CAF50;
+}
+
+.subtitulo {
+    color: #666;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Animación suave para las cartas encontradas */
+@keyframes zenGlow {
+    0% {
+        box-shadow: 0 0 5px #4CAF50;
+    }
+    50% {
+        box-shadow: 0 0 20px #4CAF50;
+    }
+    100% {
+        box-shadow: 0 0 5px #4CAF50;
+    }
+}
+
+.carta.encontrada {
+    animation: zenGlow 2s infinite;
+}
