@@ -24,28 +24,31 @@
             <button id="btnIniciar" class="btn-principal">
                 <i class="fas fa-play"></i> Iniciar
             </button>
+
+            <div id="menuModos" class="menu-modos oculto">
+                <div class="mode-cards-container">
+                    <div class="mode-card" data-mode="classic" data-transition>
+                        <i class="fas fa-gamepad"></i>
+                        <h2>Modo Clásico</h2>
+                        <p>Lucha por alcanzar la mayor cantidad de puntos</p>
+                    </div>
+                    <div class="mode-card" data-mode="timetrial" data-transition>
+                        <i class="fas fa-hourglass-half"></i>
+                        <h2>Contrareloj</h2>
+                        <p>¡Encuentra las parejas antes que se acabe el tiempo!</p>
+                    </div>
+                    <div class="mode-card" data-mode="zen" data-transition>
+                        <i class="fas fa-peace"></i>
+                        <h2>Modo Zen</h2>
+                        <p>Relájate y juega sin presión</p>
+                    </div>
+                </div>
+            </div>
+
             <button id="btnCreditos" class="btn-principal">
                 <i class="fas fa-star"></i> Créditos
             </button>
         </main>
-
-        <div id="menuModos" class="menu-modos oculto">
-            <div class="mode-card" data-mode="classic" data-transition>
-                <i class="fas fa-gamepad"></i>
-                <h2>Modo Clásico</h2>
-                <p>Lucha por alcanzar la mayor cantidad de puntos</p>
-            </div>
-            <div class="mode-card" data-mode="timetrial" data-transition>
-                <i class="fas fa-hourglass-half"></i>
-                <h2>Contrareloj</h2>
-                <p>¡Encuentra las parejas antes que se acabe el tiempo!</p>
-            </div>
-            <div class="mode-card" data-mode="zen" data-transition>
-                <i class="fas fa-peace"></i>
-                <h2>Modo Zen</h2>
-                <p>Relájate y juega sin presión</p>
-            </div>
-        </div>
 
         <footer>
             <p>Memory Fashion (KDT) &copy; 2025 - Un juego de memoria con estilo.</p>
@@ -53,7 +56,7 @@
     </div>
 
     <!-- Audio -->
-    <audio id="musicaFondo" loop>
+    <audio autoplay id="musicaFondo" loop>
         <source src="resources/audio/background-music.mp3" type="audio/mp3">
     </audio>
     <audio id="botonSonido">
