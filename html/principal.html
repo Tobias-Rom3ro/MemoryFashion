@@ -11,6 +11,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        #btnActivarMusica {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+        }
+        #btnActivarMusica:hover {
+            background-color: #c2185b;
+        }
+    </style>
 </head>
 <body>
 
@@ -69,7 +87,7 @@
     </footer>
 
     <!-- musica de fondo-->
-    <audio id="musicaFondo" autoplay loop hidden>
+    <audio id="musicaFondo" loop>
         <source src="../resources/audio/background-music.mp3" type="audio/mp3">
     </audio>
 
@@ -83,7 +101,29 @@
     <audio id="sonidoError" src="../resources/audio/error.mp3"></audio>
     <audio id="sonidoVictoria" src="../resources/audio/victory.mp3"></audio>
 
-<script src="../scripts/script.js"></script>
-<script src="../scripts/pageTransition.js"></script>
+    <script>
+        // Función autoejecutable para iniciar la música inmediatamente
+        (function() {
+            const musicaFondo = document.getElementById('musicaFondo');
+            musicaFondo.volume = 0.3;
+            
+            // Función para intentar reproducir
+            function intentarReproducir() {
+                const promesa = musicaFondo.play();
+                if (promesa) {
+                    promesa.catch(function(error) {
+                        console.log("Reintentando reproducción...");
+                        setTimeout(intentarReproducir, 100);
+                    });
+                }
+            }
+            
+            // Intentar reproducir inmediatamente y seguir intentando
+            intentarReproducir();
+        })();
+    </script>
+
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/pageTransition.js"></script>
 </body>
 </html>

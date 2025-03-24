@@ -5,6 +5,7 @@ const contadorTiempo = document.getElementById('contador-tiempo');
 const btnReiniciar = document.getElementById('reiniciar');
 const estrellas = document.querySelectorAll('.estrellas .fa-star');
 const botonesNivel = document.querySelectorAll('.btn-nivel');
+const musicaFondo = document.getElementById('musicaFondo');
 
 // Importando los sonidos 
 const sonidoAcierto = document.getElementById("sonidoAcierto");
@@ -265,6 +266,16 @@ function finalizarJuego(gano) {
 
     // Calcular puntuación (estrellas)
     const estrellasSinApagar = document.querySelectorAll('.estrellas .fa-star:not(.apagada)').length;
+    
+    // Crear el HTML para las estrellas
+    let estrellasHTML = '';
+    for (let i = 0; i < 3; i++) {
+        if (i < estrellasSinApagar) {
+            estrellasHTML += '<i class="fas fa-star" style="color: gold; margin: 0 5px;"></i>';
+        } else {
+            estrellasHTML += '<i class="far fa-star" style="color: #ccc; margin: 0 5px;"></i>';
+        }
+    }
 
     // Mostrar mensaje de victoria con SweetAlert
     setTimeout(() => {
@@ -280,10 +291,16 @@ function finalizarJuego(gano) {
                 <p><i class="fas fa-clock"></i> Tiempo: ${contadorTiempo.textContent}</p>
                 <p>Puntuación: ${puntos}</p>
                 <p>Intentos fallidos: ${intentosFallidos}</p>
+                <div style="margin-top: 10px;">
+                    <p>Tu rendimiento:</p>
+                    ${estrellasHTML}
+                </div>
             `,
             icon: gano ? 'success' : 'error',
             confirmButtonText: 'Jugar de nuevo',
-            confirmButtonColor: '#d81b60'
+            confirmButtonColor: '#d81b60',
+            background: '#fff',
+            iconColor: '#d81b60'
         }).then((result) => {
             if (result.isConfirmed) {
                 iniciarJuego();
@@ -291,6 +308,21 @@ function finalizarJuego(gano) {
         });
     }, 500);
 }
+
+// Iniciar música de fondo
+function iniciarMusicaFondo() {
+    musicaFondo.volume = 0.3;
+    musicaFondo.loop = true;
+    musicaFondo.play().catch(error => {
+        console.log("Reproducción automática bloqueada por el navegador");
+    });
+}
+
+// Intentar reproducir la música de múltiples maneras
+window.addEventListener('load', iniciarMusicaFondo);
+document.addEventListener('click', iniciarMusicaFondo);
+document.addEventListener('keydown', iniciarMusicaFondo);
+document.addEventListener('mousemove', iniciarMusicaFondo);
 
 // Event Listeners
 btnReiniciar.addEventListener('click', iniciarJuego);

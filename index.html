@@ -50,15 +50,39 @@
         <footer>
             <p>Memory Fashion (KDT) &copy; 2025 - Un juego de memoria con estilo.</p>
         </footer>
-        <script src="scripts/pageTransition.js"></script>
-        <script src="scripts/script.js"></script>
     </div>
 
-    <!-- sonido al presionar un botón -->
+    <!-- Audio -->
+    <audio id="musicaFondo" loop>
+        <source src="resources/audio/background-music.mp3" type="audio/mp3">
+    </audio>
     <audio id="botonSonido">
-        <source src="resources/audio/press-button.mp3" type="audio/mpeg">
+        <source src="resources/audio/press-button.mp3" type="audio/mp3">
     </audio>
 
+    <script>
+        // Función autoejecutable para iniciar la música inmediatamente
+        (function() {
+            const musicaFondo = document.getElementById('musicaFondo');
+            musicaFondo.volume = 0.3;
+            
+            // Función para intentar reproducir
+            function intentarReproducir() {
+                const promesa = musicaFondo.play();
+                if (promesa) {
+                    promesa.catch(function(error) {
+                        console.log("Reintentando reproducción...");
+                        setTimeout(intentarReproducir, 100);
+                    });
+                }
+            }
+            
+            // Intentar reproducir inmediatamente y seguir intentando
+            intentarReproducir();
+        })();
+    </script>
+
+    <script src="scripts/pageTransition.js"></script>
     <script src="scripts/menu.js"></script>
 </body>
 </html>

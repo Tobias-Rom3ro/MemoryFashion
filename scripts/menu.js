@@ -10,12 +10,14 @@ function reproducirSonido() {
     botonSonido.play();
 }
 
+// Event Listener para el botón Iniciar
 btnIniciar.addEventListener('click', () => {
     reproducirSonido();
-    menuModos.classList.toggle('visible');
+    menuModos.classList.add('visible');
     menuModos.classList.remove('oculto');
 });
 
+// Event Listener para el botón Créditos
 btnCreditos.addEventListener('click', () => {
     reproducirSonido();
     window.location.href = 'html/credits.html';

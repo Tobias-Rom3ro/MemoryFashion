@@ -224,18 +224,33 @@ function finalizarJuego(victoria) {
         const estrellasTotales = [...estrellas].filter(e => !e.classList.contains('apagada')).length;
         sonidoVictoria.play();
         
+        // Crear el HTML para las estrellas
+        let estrellasHTML = '';
+        for (let i = 0; i < 3; i++) {
+            if (i < estrellasTotales) {
+                estrellasHTML += '<i class="fas fa-star" style="color: gold; margin: 0 5px; font-size: 24px;"></i>';
+            } else {
+                estrellasHTML += '<i class="far fa-star" style="color: #ccc; margin: 0 5px; font-size: 24px;"></i>';
+            }
+        }
+        
         Swal.fire({
             title: '¡Victoria!',
             html: `
-                ¡Completaste el nivel con ${movimientos} movimientos!<br>
-                Tiempo restante: ${contadorTiempo.textContent}<br>
-                Estrellas conseguidas: ${estrellasTotales}
+                <div style="font-family: 'Londrina Solid', sans-serif;">
+                    <p style="font-size: 1.2em; margin-bottom: 15px;">¡Completaste el nivel con ${movimientos} movimientos!</p>
+                    <p>Tiempo restante: ${contadorTiempo.textContent}</p>
+                    <div style="margin: 15px 0;">
+                        <p>Tu rendimiento:</p>
+                        ${estrellasHTML}
+                    </div>
+                </div>
             `,
             icon: 'success',
+            iconColor: '#d81b60',
             confirmButtonText: 'Jugar de nuevo',
             confirmButtonColor: '#d81b60',
-            background: '#fff',
-            iconColor: '#d81b60'
+            background: '#fff'
         }).then((result) => {
             if (result.isConfirmed) {
                 inicializarJuego(nivelActual);
@@ -265,6 +280,21 @@ function finalizarJuego(victoria) {
         });
     }
 }
+
+// Iniciar música de fondo
+function iniciarMusicaFondo() {
+    musicaFondo.volume = 0.3;
+    musicaFondo.loop = true;
+    musicaFondo.play().catch(error => {
+        console.log("Reproducción automática bloqueada por el navegador");
+    });
+}
+
+// Intentar reproducir la música de múltiples maneras
+window.addEventListener('load', iniciarMusicaFondo);
+document.addEventListener('click', iniciarMusicaFondo);
+document.addEventListener('keydown', iniciarMusicaFondo);
+document.addEventListener('mousemove', iniciarMusicaFondo);
 
 // Event Listeners
 btnReiniciar.addEventListener('click', () => inicializarJuego(nivelActual));
