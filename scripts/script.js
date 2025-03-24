@@ -6,11 +6,10 @@ const btnReiniciar = document.getElementById('reiniciar');
 const estrellas = document.querySelectorAll('.estrellas .fa-star');
 const botonesNivel = document.querySelectorAll('.btn-nivel');
 
-//importando los sonidos 
+// Importando los sonidos 
 const sonidoAcierto = document.getElementById("sonidoAcierto");
 const sonidoError = document.getElementById("sonidoError");
 const sonidoVictoria = document.getElementById("sonidoVictoria");
-
 
 // Variables del juego
 let cartas = [];
@@ -22,6 +21,8 @@ let cronometro;
 let juegoIniciado = false;
 let dificultad = 'medio'; // Dificultad por defecto
 let totalParejas = 8; // Para nivel medio
+let puntos = 1000; // Puntos iniciales
+let intentosFallidos = 0;
 
 // Íconos de moda para las cartas
 const iconosModa = [
@@ -51,10 +52,13 @@ function iniciarJuego() {
     parejasEncontradas = 0;
     tiempoTranscurrido = 0;
     juegoIniciado = false;
+    puntos = 1000;
+    intentosFallidos = 0;
 
     // Actualizar contadores en la interfaz
     contadorMovimientos.textContent = '0';
     contadorTiempo.textContent = '00:00';
+    document.getElementById('puntos').textContent = `Puntos: ${puntos}`;
 
     // Restaurar estrellas
     estrellas.forEach(estrella => {
@@ -119,7 +123,7 @@ function crearTablero() {
         const caraTrasera = document.createElement('div');
         caraTrasera.className = 'carta-trasera';
         const iconoLogo = document.createElement('img');
-        iconoLogo.src = 'resources/images/icon.png';
+        iconoLogo.src = '../resources/images/icon.png';
         iconoLogo.alt = 'Memory Fashion';
         iconoLogo.className = 'icono-trasero';
         caraTrasera.appendChild(iconoLogo);
@@ -220,11 +224,14 @@ function verificarCoincidencia() {
 
             // Verificar si se han encontrado todas las parejas
             if (parejasEncontradas === totalParejas) {
-                finalizarJuego();
+                finalizarJuego(true);
             }
         }, 500);
     } else {
         // Las cartas no coinciden
+        puntos -= 10; // Restar puntos por intento fallido
+        intentosFallidos++;
+        document.getElementById('puntos').textContent = `Puntos: ${puntos}`;
         setTimeout(() => {
             sonidoError.currentTime = 0; // reiniciar el audio por si estaba sonando
             sonidoError.play(); //reproducir el audio para cuando NO coincide la pareja
@@ -243,11 +250,17 @@ function iniciarCronometro() {
         const minutos = Math.floor(tiempoTranscurrido / 60);
         const segundos = tiempoTranscurrido % 60;
         contadorTiempo.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        puntos -= 1; // Restar puntos por tiempo
+        document.getElementById('puntos').textContent = `Puntos: ${puntos}`;
+
+        if (puntos <= 0) {
+            finalizarJuego(false);
+        }
     }, 1000);
 }
 
 // Finalizar el juego cuando se encuentran todas las parejas
-function finalizarJuego() {
+function finalizarJuego(gano) {
     clearInterval(cronometro);
 
     // Calcular puntuación (estrellas)
@@ -255,18 +268,21 @@ function finalizarJuego() {
 
     // Mostrar mensaje de victoria con SweetAlert
     setTimeout(() => {
-        sonidoVictoria.currentTime = 0; //reiniciar el audio por si estab sonando 
-        sonidoVictoria.play(); //reproducir sonido de victoria 
+        if (gano) {
+            sonidoVictoria.currentTime = 0; //reiniciar el audio por si estab sonando 
+            sonidoVictoria.play(); //reproducir sonido de victoria 
+        }
         Swal.fire({
-            title: '¡Felicidades!',
+            title: gano ? '¡Felicidades!' : '¡Game Over!',
             html: `
-                <p>Has completado el reto</p>
+                <p>Has ${gano ? 'completado' : 'perdido'} el reto</p>
                 <p><i class="fas fa-shoe-prints"></i> Movimientos: ${movimientos}</p>
                 <p><i class="fas fa-clock"></i> Tiempo: ${contadorTiempo.textContent}</p>
-                <p>Puntuación: ${Array(estrellasSinApagar).fill('<i class="fas fa-star" style="color: gold;"></i>').join('')}</p>
+                <p>Puntuación: ${puntos}</p>
+                <p>Intentos fallidos: ${intentosFallidos}</p>
             `,
-            icon: 'success',
-            confirmButtonText: 'Jugar otra vez',
+            icon: gano ? 'success' : 'error',
+            confirmButtonText: 'Jugar de nuevo',
             confirmButtonColor: '#d81b60'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -276,38 +292,32 @@ function finalizarJuego() {
     }, 500);
 }
 
-
-//función para reproducir el sonido de los botones 
-const botones = document.querySelectorAll("button");
-
-    function reproducirSonido() {
-        const sonido = document.getElementById("botonSonido");
-        sonido.currentTime = 0; // Reinicia el audio para que suene cada vez que se presiona
-        sonido.play();
-    }
-
-    //agregar el sonido a cada boton 
-    botones.forEach(boton => {
-        boton.addEventListener("click", reproducirSonido);
-    });
-
-
 // Event Listeners
 btnReiniciar.addEventListener('click', iniciarJuego);
 
 // Event Listeners para los botones de nivel
 botonesNivel.forEach(btn => {
     btn.addEventListener('click', () => {
+        // Remover seleccionado de todos los botones
+        botonesNivel.forEach(b => b.classList.remove('seleccionado'));
+        // Agregar seleccionado al botón clickeado
+        btn.classList.add('seleccionado');
+        // Actualizar dificultad y reiniciar juego
         dificultad = btn.dataset.dificultad;
         iniciarJuego();
     });
 });
 
-//evento para reducir al 15% el volumen de la musica de fondo
-window.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("musicaFondo").volume = 0.15; 
-});
-
-
 // Iniciar el juego cuando carga la página
-window.addEventListener('load', iniciarJuego);
+document.addEventListener('DOMContentLoaded', () => {
+    // Configurar dificultad inicial
+    dificultad = 'medio';
+    // Seleccionar el botón de dificultad media
+    botonesNivel.forEach(btn => {
+        if (btn.dataset.dificultad === dificultad) {
+            btn.classList.add('seleccionado');
+        }
+    });
+    // Iniciar el juego
+    iniciarJuego();
+});
