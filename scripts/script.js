@@ -25,7 +25,7 @@ let totalParejas = 8; // Para nivel medio
 let puntos = 1000; // Puntos iniciales
 let intentosFallidos = 0;
 
-// Íconos de moda para las cartas
+// Íconos para las cartas
 const iconosModa = [
     'fa-tshirt', 'fa-shoe-prints', 'fa-hat-wizard', 'fa-glasses',
     'fa-gem', 'fa-shopping-bag', 'fa-spa', 'fa-socks',
@@ -189,7 +189,7 @@ function actualizarMovimientos() {
 
 // Actualizar las estrellas según el rendimiento
 function actualizarEstrellas() {
-    // Thresholds para perder estrellas (ajustar según dificultad)
+    // Thresholds para perder estrellas
     const limitesPorDificultad = {
         facil: [4, 6],
         medio: [6, 10],
